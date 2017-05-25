@@ -10,8 +10,10 @@ export default () => {
       < NavBar title="Dog and Student Lister" color="black" />
       <Switch>
         < Route path="/students" component={StudentsContainer} />
-        < Route exact path="/about"  render={() => <h1>This is an app about dogs and students</h1>}/>
+        < Route path="/about" render={() => <h1>This is an app about dogs and students</h1>}/>
       </Switch>
     </div>
   )
 }
+
+//Route path renders correct components on line 12-13
