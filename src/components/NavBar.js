@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import SignIn from './SignIn'
 
 function NavBar(props){
   const colors = {
@@ -23,6 +24,7 @@ function NavBar(props){
             <li><Link to="/about">About</Link></li>
             <li><Link to="/students">Students</Link></li>
             <li><Link to="/students/new">Add a Student</Link></li>
+            <li><SignIn /></li>
           </ul>
         </div>
       </div>
