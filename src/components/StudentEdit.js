@@ -41,7 +41,7 @@ class StudentEdit extends React.Component {
         <form onSubmit={this.handleSubmit.bind(this)}>
           <label>Student Name</label>
           <input type='text' value={this.state.student.name} onChange={this.handleInputChange} />
-          <input type='submit' value='Add a Student' />
+          <input type='submit' value='Edit Student' />
         </form>
       </div>
     )

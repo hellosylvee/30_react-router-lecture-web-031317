@@ -1,9 +1,10 @@
-import React from 'react'
+import React, {Component} from 'react'
 import { Switch, Route } from 'react-router-dom'
 import NavBar from './NavBar'
 import StudentsContainer from '../containers/StudentsContainer'
 
-export default () => {
+
+export default function Main(props) {
   return (
     <div>
       < NavBar title="Dog and Student Lister" color="black" />

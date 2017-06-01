@@ -1,17 +1,18 @@
 import React, { Component } from 'react'
 import StudentsPage from '../components/StudentsPage'
 
-import { fetchStudents, createStudent, deleteStudent }  from '../api'
+import { fetchStudents, createStudent, deleteStudent, updateStudent }  from '../api'
 
 class StudentsContainer extends Component {
 
   constructor(){
     super()
+    console.log("constructor!")
     this.state = {
       students: []
     }
 
-    this.handleAddStudent = this.handleAddStudent.bind(this)
+    this.handleAddStudent    = this.handleAddStudent.bind(this)
     this.handleDeleteStudent = this.handleDeleteStudent.bind(this)
     this.handleUpdateStudent = this.handleUpdateStudent.bind(this)
   }
@@ -42,20 +43,24 @@ class StudentsContainer extends Component {
   } //Deletes students on the list
 
   handleUpdateStudent(student){
-    this.setState(prevState => {
-      return {
-        students: prevState.students.map(s => {
-          if (s.id === student.id) {
-            return student
-          } else {
-            return s
-          }
-        })
-      }
+    updateStudent(student).then( () => {
+      this.setState(prevState => {
+        return {
+          students: prevState.students.map(s => {
+            if (s.id === student.id) {
+              return student
+            } else {
+              return s
+            }
+          })
+        }
+      })
+      this.props.history.push(`/students/${student.id}`)
     })
   }
 
   render(){
+    console.log(this.state)
     return (
       <StudentsPage
         students={this.state.students}
