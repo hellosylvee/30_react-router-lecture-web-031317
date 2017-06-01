@@ -13,6 +13,7 @@ class StudentsContainer extends Component {
 
     this.handleAddStudent = this.handleAddStudent.bind(this)
     this.handleDeleteStudent = this.handleDeleteStudent.bind(this)
+    this.handleUpdateStudent = this.handleUpdateStudent.bind(this)
   }
 
   //Making GET request to get students
@@ -40,12 +41,27 @@ class StudentsContainer extends Component {
     })
   } //Deletes students on the list
 
+  handleUpdateStudent(student){
+    this.setState(prevState => {
+      return {
+        students: prevState.students.map(s => {
+          if (s.id === student.id) {
+            return student
+          } else {
+            return s
+          }
+        })
+      }
+    })
+  }
+
   render(){
     return (
       <StudentsPage
         students={this.state.students}
         onSubmit={this.handleAddStudent}
-        onDelete={this.handleDeleteStudent} />
+        onDelete={this.handleDeleteStudent}
+        onUpdate={this.handleUpdateStudent}/>
     )
   }
 }
