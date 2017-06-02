@@ -6,7 +6,6 @@ function NavBar(props){
     black: 'navbar-inverse',
     white: 'navbar-default'
   }
-  colors['black']
 
   return (
     <nav className={`navbar ${colors[props.color]}`}>
@@ -21,6 +20,7 @@ function NavBar(props){
           <ul className="nav navbar-nav">
             <li><Link to="/">Home</Link></li>
             <li><Link to="/about">About</Link></li>
+            <li><Link to="/login">Log In</Link></li>
             <li><Link to="/students">Students</Link></li>
             <li><Link to="/students/new">Add a Student</Link></li>
           </ul>

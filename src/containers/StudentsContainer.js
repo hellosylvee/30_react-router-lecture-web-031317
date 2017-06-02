@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import StudentsPage from '../components/StudentsPage'
 
-import { fetchStudents, createStudent, deleteStudent }  from '../api'
+import { fetchStudents, createStudent, deleteStudent, updateStudent }  from '../api'
 
 class StudentsContainer extends Component {
 
@@ -11,8 +11,9 @@ class StudentsContainer extends Component {
       students: []
     }
 
-    this.handleAddStudent = this.handleAddStudent.bind(this)
+    this.handleAddStudent    = this.handleAddStudent.bind(this)
     this.handleDeleteStudent = this.handleDeleteStudent.bind(this)
+    this.handleUpdateStudent = this.handleUpdateStudent.bind(this)
   }
 
   //Making GET request to get students
@@ -21,13 +22,14 @@ class StudentsContainer extends Component {
       .then( students => this.setState({
         students: students
       }) )
+      .catch( err => console.log(err) )
   }
 
   //Making POST request of object, then adding student to list
   handleAddStudent(name){
     createStudent(name)
       .then( student => this.setState( prevState =>  ({ students: [...prevState.students, student] }) ))
-      .catch(e => console.log(e))
+      .catch(err => console.log(err))
   }
 
   //Making a DELETE request of object, then rendering list
@@ -40,12 +42,26 @@ class StudentsContainer extends Component {
     })
   } //Deletes students on the list
 
+  handleUpdateStudent(student){
+    updateStudent(student).then( () => {
+      this.setState(prevState => {
+        return {
+          students: prevState.students.map(s => {
+            if (s.id === student.id) {
+              return student
+            } else {
+              return s
+            }
+          })
+        }
+      })
+      this.props.history.push(`/students/${student.id}`)
+    })
+  }
+
   render(){
     return (
-      <StudentsPage
-        students={this.state.students}
-        onSubmit={this.handleAddStudent}
-        onDelete={this.handleDeleteStudent} />
+      < StudentsPage students={this.state.students} onSubmit={this.handleAddStudent} onDelete={this.handleDeleteStudent} onUpdate={this.handleUpdateStudent}/>
     )
   }
 }
