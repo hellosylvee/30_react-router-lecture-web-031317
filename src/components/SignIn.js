@@ -1,14 +1,26 @@
-import React from 'react'
+import React, { Component } from 'react'
 
-const SignIn = () => {
-  return(
-    <form class="navbar-form navbar-left">
-      <span class="form-group">
-        <input type="text" class="form-control" placeholder="Search" />
-      </span>
-      <button type="submit" class="btn btn-default">Submit</button>
-    </form>
-  )
+class SignIn extends Component {
+  constructor(){
+    super()
+    this.state = {
+      username: '',
+      password: ''
+    }
+  }
+  
+  render(){
+    return(
+      <form onSubmit="handleSubmit" className="navbar-form navbar-left">
+        <span className="form-group">
+          <input type="text" className="form-control" placeholder="Enter Username" />
+          <input type="text" className="form-control" placeholder="Enter Password" />
+        </span>
+
+        <button type="submit" className="btn btn-default">Submit</button>
+      </form>
+    )
+  }
 }
 
 export default SignIn
